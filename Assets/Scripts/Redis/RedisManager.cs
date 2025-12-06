@@ -16,7 +16,7 @@ namespace Redis
         private ISubscriber _subscriber;
         public bool IsConnected => _connection is { IsConnected: true };
 
-        public event Action<ConnectionMultiplexer> OnConnect;
+        public event Action OnConnect;
         public event Action OnDisconnect;
 
         public string redisURL;
@@ -42,7 +42,7 @@ namespace Redis
             _subscriber = _connection.GetSubscriber();
             Debug.Log("Connection established");
 
-            OnConnect?.Invoke(_connection);
+            OnConnect?.Invoke();
             return _connection;
         }
 
